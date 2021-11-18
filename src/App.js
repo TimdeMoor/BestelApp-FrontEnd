@@ -1,25 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useState, useEffect} from "react";
+import axios from "axios";
+import BestellingenOverzicht from "./bestellingenOverzicht";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [bestellingen, setBestellingen] = useState([])
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/api/v1/orders/incomplete")
+            .then(res => {
+                    setBestellingen(res.data)
+                }
+            )
+    },[])
+
+    return (
+        <div className="App">
+            <BestellingenOverzicht bestellingen={bestellingen}/>
+        </div>
+    );
 }
+
 
 export default App;
