@@ -7,17 +7,21 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
+    "bootstrap": "^5.1.3",
     "postcss-cli": "^9.0.2",
     "react": "^17.0.2",
+    "react-bootstrap": "^2.0.4",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "typescript": "^4.5.4",
     "uuid": "^8.3.2",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "websocket": "^1.0.34"
   },
   "scripts": {
-    "start": "craco start && postcss src/css/app.css -o public/app.css",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

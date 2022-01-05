@@ -1,16 +1,16 @@
 import "./App.css"
 import React from "react"
-import BestellingenOverzicht from "./components/bestellingenOverzicht"
+import MenuOverzicht from "./components/MenuOverzicht"
 
-function App() {
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+function App(){
 	return (
 		<div className="App">
-			<BestellingenOverzicht/>
-			<i>TestText</i>
+			<h1>Menu</h1>
+			<MenuOverzicht/>
 		</div>
 	)
 }
-
 
 export default App
