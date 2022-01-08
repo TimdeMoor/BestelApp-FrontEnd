@@ -1,45 +1,48 @@
-import React, {useEffect, useState} from "react"
-import {Dish, Order, OrderItem} from "./Entities"
+import React from "react"
+import {DishOrderItem, Order, OrderItem} from "./Entities"
 import {Button} from "react-bootstrap"
 import requester from "../requester"
-import {randomUUID} from "crypto"
-import {string} from "prop-types"
+
 
 export default function Bestellijst(props:{
-
+	orderItems: DishOrderItem[],
+	setOrderItems(NewOrderItems:DishOrderItem[])
 }){
-	const [dish, setDish] = useState<Dish>({id: 0, name: "", price: 0})
-	const [orderItems, setOrderItems] = useState<OrderItem[]>([])
-	const [tableId, setTableId] = useState<number>(0)
-	const [comment, setComment] = useState<string>("")
-
-	useEffect(() => {
-		setOrderItems([])
-	},[])
-
 
 	async function SubmitOrder(){
-		const newBestelling:Order = {id: 1, isComplete: false, tableId: tableId, totalPrice: 0}
+		const randomId = Math.floor(100000000 + (Math.random() * 900000000)) as number
+		const newBestelling:Order = {id: randomId, isComplete: false, tableId: 1, totalPrice: 0}
 		console.log(newBestelling)
 		const response = await requester.post("orders", newBestelling)
 		console.log(response)
+
+		props.orderItems.forEach(function(orderItem){
+			const newOrderItem:OrderItem = {
+				amount: orderItem.amount,
+				comment: orderItem.comment,
+				dishId: orderItem.dishId,
+				orderId: randomId
+			}
+			requester.post("order-items",newOrderItem)
+		})
+
+		props.setOrderItems([])
 	}
 
-	async function getDishFromId(dishId: number) {
-		const response = await requester.get(`/dishes/${dishId}`)
-		setDish(response.data as Dish)
-	}
 
 	return (
 		<div>
-			{orderItems.map((orderItem) => {
-				return (
-					<div key={orderItem.id}>
-						{getDishFromId(orderItem.dishId)}
-						<p>`1x ${dish.name}`</p>
-					</div>
-				)
-			})}
+			<h2>Huidige Bestelling</h2>
+			<ul>
+				{props.orderItems.map((orderItem, index) => {
+					return (
+						<li key={index}>
+							<p>{orderItem.amount}x {orderItem.dishName}</p>
+							<p>{orderItem.comment ? "" : orderItem.comment}</p>
+						</li>
+					)
+				})}
+			</ul>
 			<Button variant={"success"} onClick={SubmitOrder}>Plaats bestelling</Button>
 		</div>
 	)
