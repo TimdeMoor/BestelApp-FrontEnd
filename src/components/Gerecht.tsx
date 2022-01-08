@@ -3,7 +3,8 @@ import {Dish} from "./Entities"
 import {Button, Card} from "react-bootstrap"
 
 export default function Gerecht(props:{
-    dish: Dish
+    dish: Dish,
+	handleDishOnClick(DishId: number)
 }){
 	const [dish, setDish] = useState<Dish>({id: 0, name: "TEST", price: 0})
 
@@ -18,7 +19,8 @@ export default function Gerecht(props:{
 					<Card.Title><h3>{dish.name}</h3></Card.Title>
 					<div>
 						<p>€{dish.price}</p>
-						<Button variant={"success"}>Bestel</Button>
+						{//<Button variant={"success"} onClick={props.handleDishOnClick(dish.id)}>Bestel</Button>
+						}
 					</div>
 				</Card.Body>
 				<Card.Footer>

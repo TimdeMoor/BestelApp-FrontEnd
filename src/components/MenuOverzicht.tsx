@@ -2,10 +2,12 @@ import React, {useEffect, useState} from "react"
 import {Dish} from "./Entities"
 import axios from "axios"
 import {Container} from "react-bootstrap"
-import Gerecht from "./Dish"
+import Gerecht from "./Gerecht"
 
 
-export default function MenuOverzicht(){
+export default function MenuOverzicht(props:{
+	handleDishOnClick(DishId: number)
+}){
 	const [dishes, setDishes] = useState<Dish[]>([])
 	useEffect(() => {
 		setInterval(() => {
@@ -19,7 +21,11 @@ export default function MenuOverzicht(){
 		<Container>{
 			dishes.map(dish => {
 				return(
-					<Gerecht dish = {dish} key = {dish.id}/>
+					<Gerecht
+						handleDishOnClick={props.handleDishOnClick}
+						dish={dish}
+						key={dish.id}
+					/>
 				)
 			})
 		}</Container>
