@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react"
 import {Dish, DishOrderItem} from "./Entities"
-import {Container, Row, Col} from "react-bootstrap"
+import {Container, Row, Col, Card} from "react-bootstrap"
 import Gerecht from "./Gerecht"
 import config from "./../Config"
 import requester from "../requester"
@@ -32,7 +32,12 @@ export default function MenuOverzicht() {
 			orderId: 1,
 		}
 
-		setOrderItems([...orderItems, newOrderItem])
+		const existingOrderItem = orderItems.find(oi => oi.dishId === newOrderItem.dishId)
+		if (existingOrderItem){
+			existingOrderItem.amount++
+		}else{
+			setOrderItems([...orderItems, newOrderItem])
+		}
 	}
 
 	return (
@@ -51,7 +56,9 @@ export default function MenuOverzicht() {
 				}
 				</Col>
 				<Col>
-					<Bestellijst orderItems={orderItems} setOrderItems={setOrderItems}/>
+					<Card>
+						<Bestellijst orderItems={orderItems} setOrderItems={setOrderItems}/>
+					</Card>
 				</Col>
 			</Row>
 		</Container>

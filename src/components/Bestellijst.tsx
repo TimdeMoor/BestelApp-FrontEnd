@@ -1,6 +1,6 @@
 import React from "react"
 import {DishOrderItem, Order, OrderItem} from "./Entities"
-import {Button} from "react-bootstrap"
+import {Badge, Button, ListGroup} from "react-bootstrap"
 import requester from "../requester"
 
 
@@ -33,16 +33,17 @@ export default function Bestellijst(props:{
 	return (
 		<div>
 			<h2>Huidige Bestelling</h2>
-			<ul>
+			<ListGroup as={"ul"}>
 				{props.orderItems.map((orderItem, index) => {
 					return (
-						<li key={index}>
-							<p>{orderItem.amount}x {orderItem.dishName}</p>
+						<ListGroup.Item as={"li"} key={index} variant={index%2 ? "secondary" : "dark"}>
+							<span>{orderItem.dishName}</span>
+							<Badge pill>{orderItem.amount}x</Badge>
 							<p>{orderItem.comment ? "" : orderItem.comment}</p>
-						</li>
+						</ListGroup.Item>
 					)
 				})}
-			</ul>
+			</ListGroup>
 			<Button variant={"success"} onClick={SubmitOrder}>Plaats bestelling</Button>
 		</div>
 	)
