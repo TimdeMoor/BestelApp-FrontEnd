@@ -6,8 +6,10 @@ import config from "./../Config"
 import requester from "../requester"
 import Bestellijst from "./Bestellijst"
 
-export default function MenuOverzicht() {
-	const [dishes, setDishes] = useState<Dish[]>([])
+export default function MenuOverzicht(props:{
+	dishes:Dish[]|undefined
+}) {
+	const [dishes, setDishes] = useState<Dish[]>(props.dishes)
 	const [orderItems, setOrderItems] = useState<DishOrderItem[]>([])
 
 	useEffect(() => {

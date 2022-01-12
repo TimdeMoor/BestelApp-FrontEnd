@@ -6,8 +6,7 @@ export default function MainPage(){
 
 	return (
 		<div>
-			<MenuOverzicht/>
+			<MenuOverzicht dishes={[]}/>
 		</div>
-
 	)
 }

@@ -33,7 +33,7 @@ export default function Bestellijst(props:{
 	return (
 		<div>
 			<h2>Huidige Bestelling</h2>
-			<ListGroup as={"ul"}>
+			<ListGroup as={"ul"} data-testid={"OrderList"}>
 				{props.orderItems.map((orderItem, index) => {
 					return (
 						<ListGroup.Item as={"li"} key={index} variant={index%2 ? "secondary" : "dark"}>
