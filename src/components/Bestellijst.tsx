@@ -44,7 +44,7 @@ export default function Bestellijst(props:{
 					)
 				})}
 			</ListGroup>
-			<Button variant={"success"} onClick={SubmitOrder}>Plaats bestelling</Button>
+			<Button name={"btnPlaatsBestelling"} variant={"success"} onClick={SubmitOrder}>Plaats bestelling</Button>
 		</div>
 	)
 }

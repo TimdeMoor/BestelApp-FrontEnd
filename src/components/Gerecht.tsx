@@ -23,12 +23,15 @@ export default function Gerecht(props:{
 					<Card.Title><h3>{dish.name}</h3></Card.Title>
 					<div>
 						<p>€{dish.price}</p>
-						<Button data-testid={`BestelKnop${dish.name}`} variant={"success"} onClick={handleDishOnClick}>Bestel</Button>
+						<Button
+							name={`BestelKnop${dish.name}`}
+							data-testid={`BestelKnop${dish.name}`}
+							variant={"success"}
+							onClick={handleDishOnClick}
+						>Bestel
+						</Button>
 					</div>
 				</Card.Body>
-				<Card.Footer>
-
-				</Card.Footer>
 			</Card>
 		</div>
 	)
